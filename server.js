@@ -18,7 +18,13 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.DATABASE_URL, { dbName: "mybrary", useNewUrlParser: true, user: "root", pass: "example" })
+
+// Connection to local database
+// mongoose.connect(process.env.DATABASE_URL, { dbName: "mybrary", useNewUrlParser: true, user: "root", pass: "example" })
+
+// Connection to cloud database
+mongoose.connect(process.env.DATABASE_URL, { dbName: "mybrary", useNewUrlParser: true })
+
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
